@@ -1,0 +1,8 @@
+{
+  "name": "html-image-generator",
+  "version": "0.0.0",
+  "main": "",
+  "repository": "git@github.com:amotarao/html-image-generator.git",
+  "author": "Amon Sawamura <amotarao@gmail.com>",
+  "license": "MIT"
+}
