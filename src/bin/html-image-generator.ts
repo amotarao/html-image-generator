@@ -54,8 +54,9 @@ const run = async () => {
             viewport: { width: options.width, height: options.height },
             screenshotOptions: { type: options.type, quality: options.quality },
           },
-          dist: path.resolve(rootDir, dist),
+          dist: path.resolve(dir, dist),
         });
+        console.log(`✔︎ Generated: ${dist}`);
       })
     )
   );

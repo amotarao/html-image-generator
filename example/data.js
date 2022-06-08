@@ -3,7 +3,7 @@ export default async () => {
     const num = Math.floor(Math.random() * 1000);
 
     return {
-      dist: `example/dist/image-${num}.jpg`,
+      dist: `./dist/image-${num}.jpg`,
       title: `Number: ${num}`,
     };
   });
