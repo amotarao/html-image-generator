@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        width: 100vw;
+        height: 100vh;
+      }
+
+      .image img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        vertical-align: bottom;
+      }
+
+      .title {
+        width: 100vw;
+        height: 100vh;
+        display: grid;
+        place-items: center;
+      }
+
+      .title p {
+        background: rgba(255, 255, 255, 0.7);
+        font-size: 64px;
+        padding: 0 0.5em;
+      }
+
+      .url {
+        position: absolute;
+        right: 20px;
+        bottom: 20px;
+        background: rgba(255, 255, 255, 0.7);
+        padding: 0 0.5em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="image"><img src="{{ assetsDir }}/hector-ramon-perez-sjAtGCs6VXs-unsplash.jpg" /></div>
+    <div class="title"><p>{{ title }}</p></div>
+    <div class="url">Photo: https://unsplash.com/</div>
+  </body>
+</html>
