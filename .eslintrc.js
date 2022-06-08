@@ -10,5 +10,6 @@ module.exports = {
   ],
   rules: {
     'import/order': ['error', { alphabetize: { order: 'asc' } }],
+    'import/no-unresolved': 'off',
   },
 };
