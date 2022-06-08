@@ -1,8 +1,12 @@
+#!/usr/bin/env node
+
 import { promises as fs } from 'fs';
 import path from 'path';
 import yaml from 'js-yaml';
 import pLimit from 'p-limit';
 import { ScreenshotOptions, Viewport } from 'puppeteer';
+import { hideBin } from 'yargs/helpers';
+import yargs from 'yargs/yargs';
 import { generate } from '../main.js';
 
 const limit = pLimit(3);
@@ -15,8 +19,16 @@ type Options = {
 };
 
 const run = async () => {
+  const argv = await yargs(hideBin(process.argv))
+    .option('dir', {
+      alias: 'd',
+      type: 'string',
+      demandOption: true,
+    })
+    .help().argv;
+
   const rootDir = path.resolve(process.cwd());
-  const dir = path.resolve(rootDir, 'example');
+  const dir = path.resolve(rootDir, argv.dir);
 
   const templateFile = path.resolve(dir, 'template.html');
   const assetsDir = path.resolve(dir, 'assets');
