@@ -1,11 +1,15 @@
 {
   "name": "html-image-generator",
   "version": "0.0.0",
-  "main": "",
   "repository": "git@github.com:amotarao/html-image-generator.git",
   "author": "Amon Sawamura <amotarao@gmail.com>",
   "license": "MIT",
+  "type": "module",
+  "main": "./dist/main.js",
+  "bin": "./dist/bin/html-image-generator.js",
+  "types": "./dist",
   "scripts": {
+    "build": "tsc",
     "format": "prettier --write .",
     "lint": "eslint './src/**/*.ts' --fix"
   },
