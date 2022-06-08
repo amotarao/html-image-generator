@@ -6,7 +6,9 @@
   "license": "MIT",
   "type": "module",
   "main": "./dist/main.js",
-  "bin": "./dist/bin/html-image-generator.js",
+  "bin": {
+    "html-image-generator": "./dist/bin/html-image-generator.js"
+  },
   "files": [
     "dist"
   ],
