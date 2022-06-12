@@ -146,4 +146,4 @@ quality: 70 # optional: valid with jpeg or webp
 $ yarn dev
 ```
 
-Run script and watch `[template-name]/_dev.(jpeg,png,webp)`
+Run script and watch `[template-name]/_dev.[jpeg, png or webp]`
