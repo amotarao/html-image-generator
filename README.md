@@ -103,17 +103,17 @@ export default [
   {
     title: 'Apple',
     image: 'https://example.com/images/apple.png',
-    dist: 'apple.png',
+    dist: 'dist/apple.png',
   },
   {
     title: 'Banana',
     image: 'https://example.com/images/banana.png',
-    dist: 'banana.png',
+    dist: 'dist/banana.png',
   },
   {
     title: 'Candy',
     image: 'https://example.com/images/candy.png',
-    dist: 'candy.png',
+    dist: 'dist/candy.png',
   },
 ];
 
@@ -126,7 +126,7 @@ export default async () => {
   return contents.map((content) => ({
     title: content.title,
     image: content.image.url,
-    dist: `${content.id}.png`,
+    dist: `dist/${content.id}.png`,
   }));
 };
 ```
