@@ -26,7 +26,7 @@ $ yarn add html-image-generator
 
 #### Decide the template name
 
-Add \[template-name\] directory
+Add `[template-name]` directory
 
 #### Add scripts on package.json
 
@@ -45,10 +45,10 @@ Add \[template-name\] directory
 
 #### Add files
 
-- \[template-name\]/template.html
-- \[template-name\]/data.js
-- \[template-name\]/options.yaml
-- \[template-name\]/assets/\[some asset files\]
+- `[template-name]`/template.html
+- `[template-name]`/data.js
+- `[template-name]`/options.yaml
+- `[template-name]`/assets/`[some asset files]`
 
 #### Run script
 
