@@ -28,7 +28,7 @@ $ yarn add html-image-generator
 
 Add \[template-name\] directory
 
-### Add scripts on package.json
+#### Add scripts on package.json
 
 ```json
 {
@@ -49,3 +49,11 @@ Add \[template-name\] directory
 - \[template-name\]/data.js
 - \[template-name\]/options.yaml
 - \[template-name\]/assets/\[some asset files\]
+
+#### Run script
+
+```bash
+$ yarn dev
+# OR
+$ yarn generate
+```
