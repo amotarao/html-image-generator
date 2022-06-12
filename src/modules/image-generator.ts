@@ -25,5 +25,7 @@ export const generate = async (html: string, options: GenerateOptions): Promise<
   await page.setContent(html, { waitUntil: 'networkidle' });
 
   const image = await page.screenshot(options.screenshotOptions);
+  await page.close();
+
   return image;
 };
