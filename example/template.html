@@ -2,6 +2,9 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Gentium+Plus&display=swap" rel="stylesheet" />
     <style>
       *,
       *::before,
@@ -14,17 +17,9 @@
       body {
         width: 100vw;
         height: 100vh;
-      }
-
-      .image img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: -1;
-        width: 100vw;
-        height: 100vh;
-        object-fit: cover;
-        vertical-align: bottom;
+        background-image: url('{{{ assetsDir }}}/hector-ramon-perez-sjAtGCs6VXs-unsplash.jpg');
+        background-size: cover;
+        background-position: center center;
       }
 
       .title {
@@ -38,6 +33,7 @@
         background: rgba(255, 255, 255, 0.7);
         font-size: 64px;
         padding: 0 0.5em;
+        font-family: 'Gentium Plus', serif;
       }
 
       .url {
@@ -46,11 +42,11 @@
         bottom: 20px;
         background: rgba(255, 255, 255, 0.7);
         padding: 0 0.5em;
+        font-family: 'Gentium Plus', serif;
       }
     </style>
   </head>
   <body>
-    <div class="image"><img src="{{ assetsDir }}/hector-ramon-perez-sjAtGCs6VXs-unsplash.jpg" /></div>
     <div class="title"><p>{{ title }}</p></div>
     <div class="url">Photo: https://unsplash.com/</div>
   </body>
