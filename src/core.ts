@@ -4,8 +4,6 @@ import { generate as generateHtml } from './modules/html-generator.js';
 import { generate as generateImage, GenerateOptions as GenerateImageOptions } from './modules/image-generator.js';
 import { closeServer, listenServer } from './modules/server.js';
 
-const limit = pLimit(3);
-
 export type CoreOptions = {
   template: string;
   data: {
@@ -15,6 +13,7 @@ export type CoreOptions = {
   baseDir: string;
   assetsDir: string;
   generateOptions: GenerateImageOptions;
+  concurrency?: number;
   log?: boolean;
 };
 
@@ -24,8 +23,10 @@ export const generate = async ({
   baseDir,
   assetsDir,
   generateOptions,
+  concurrency = 3,
   log = false,
 }: CoreOptions): Promise<(Buffer | string | undefined)[]> => {
+  const limit = pLimit(concurrency);
   const port = await listenServer(assetsDir);
 
   const images = await Promise.all(

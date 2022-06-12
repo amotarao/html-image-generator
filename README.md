@@ -137,9 +137,10 @@ export default async () => {
 ```yaml
 width: 1200 # required
 height: 630 # required
-type: png # optional: png, jpeg or webp. NOT jpg.
+type: png # optional: png (default), jpeg or webp. NOT jpg.
 quality: 70 # optional: valid with jpeg and webp
 omitBackground: true # optional: transparent background
+concurrency: 3 # optional
 ```
 
 ## Development mode

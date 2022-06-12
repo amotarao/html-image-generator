@@ -12,9 +12,10 @@ type Options = {
 type TemplateOptions = {
   width: ViewportSize['width'];
   height: ViewportSize['height'];
-  type: PageScreenshotOptions['type'];
-  quality: PageScreenshotOptions['quality'];
-  omitBackground: PageScreenshotOptions['omitBackground'];
+  type?: PageScreenshotOptions['type'];
+  quality?: PageScreenshotOptions['quality'];
+  omitBackground?: PageScreenshotOptions['omitBackground'];
+  concurrency?: number;
 };
 
 const buildOptions = async (dir: string): Promise<core.CoreOptions> => {
@@ -51,6 +52,7 @@ const buildOptions = async (dir: string): Promise<core.CoreOptions> => {
         omitBackground: options.omitBackground,
       },
     },
+    concurrency: options.concurrency,
   };
 };
 
