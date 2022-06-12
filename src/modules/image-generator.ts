@@ -1,10 +1,10 @@
-import puppeteer, { Browser, ScreenshotOptions, Viewport } from 'puppeteer';
+import { Browser, chromium, PageScreenshotOptions, ViewportSize } from 'playwright-core';
 
 let launch: Promise<Browser> | null = null;
 
 const launchBrowser = () => {
   if (launch === null) {
-    launch = puppeteer.launch({
+    launch = chromium.launch({
       headless: true,
       args: ['--no-sandbox', '--font-render-hinting=none'],
     });
@@ -13,16 +13,16 @@ const launchBrowser = () => {
 };
 
 export type GenerateOptions = {
-  viewport: Viewport;
-  screenshotOptions?: ScreenshotOptions;
+  viewport: ViewportSize;
+  screenshotOptions?: PageScreenshotOptions;
 };
 
-export const generate = async (html: string, options: GenerateOptions): Promise<string | Buffer> => {
+export const generate = async (html: string, options: GenerateOptions): Promise<Buffer> => {
   const browser = await launchBrowser();
   const page = await browser.newPage();
 
-  await page.setViewport(options.viewport);
-  await page.setContent(html, { waitUntil: 'networkidle0' });
+  await page.setViewportSize(options.viewport);
+  await page.setContent(html, { waitUntil: 'networkidle' });
 
   const image = await page.screenshot(options.screenshotOptions);
   return image;
