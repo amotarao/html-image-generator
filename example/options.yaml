@@ -1,4 +1,4 @@
 width: 1200
 height: 630
-type: jpeg
-quality: 70
+type: png
+omitBackground: true

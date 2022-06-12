@@ -3,7 +3,7 @@ export default async () => {
 
   return nums.map((num) => {
     return {
-      dist: `./dist/image-${num}.jpg`,
+      dist: `./dist/image-${num}.png`,
       title: `Number: ${num}`,
     };
   });
