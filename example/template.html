@@ -14,17 +14,9 @@
       body {
         width: 100vw;
         height: 100vh;
-      }
-
-      .image img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: -1;
-        width: 100vw;
-        height: 100vh;
-        object-fit: cover;
-        vertical-align: bottom;
+        background-image: url('{{{ assetsDir }}}/hector-ramon-perez-sjAtGCs6VXs-unsplash.jpg');
+        background-size: cover;
+        background-position: center center;
       }
 
       .title {
@@ -50,7 +42,6 @@
     </style>
   </head>
   <body>
-    <div class="image"><img src="{{ assetsDir }}/hector-ramon-perez-sjAtGCs6VXs-unsplash.jpg" /></div>
     <div class="title"><p>{{ title }}</p></div>
     <div class="url">Photo: https://unsplash.com/</div>
   </body>
