@@ -41,5 +41,6 @@ export const generate = async ({ dir }: Options): Promise<void> => {
       viewport: { width: options.width, height: options.height },
       screenshotOptions: { type: options.type, quality: options.quality },
     },
+    log: true,
   });
 };

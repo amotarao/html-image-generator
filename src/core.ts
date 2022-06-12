@@ -16,6 +16,7 @@ type CoreOptions = {
   baseDir: string;
   assetsDir: string;
   generateOptions: GenerateImageOptions;
+  log?: boolean;
 };
 
 export const generate = async ({
@@ -24,6 +25,7 @@ export const generate = async ({
   baseDir,
   assetsDir,
   generateOptions,
+  log = false,
 }: CoreOptions): Promise<(Buffer | string | undefined)[]> => {
   const port = await listenServer(assetsDir);
 
@@ -36,7 +38,7 @@ export const generate = async ({
         if ('dist' in d && d.dist) {
           const file = path.resolve(baseDir, d.dist);
           await fs.writeFile(file, image);
-          console.log(`✔︎ Generated: ${d.dist}`);
+          log && console.log(`✔︎ Generated: ${d.dist}`);
           return;
         }
 
