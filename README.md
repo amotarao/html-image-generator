@@ -62,6 +62,10 @@ $ yarn generate
 
 ### `template.html`
 
+Add HTML template with [mustache.js](https://github.com/janl/mustache.js).
+
+Use `{{ assetsDir }}` for assets directory.
+
 ```html
 <!DOCTYPE html>
 <html>
@@ -70,19 +74,24 @@ $ yarn generate
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
     <style>
-      h1 {
+      .title {
         font-size: 100px;
         font-family: 'Roboto', sans-serif;
       }
-      img {
+      .image {
+        width: 300px;
+        height: 300px;
+      }
+      .logo {
         width: 100px;
-        height: 100px;
+        height: 20px;
       }
     </style>
   </head>
   <body>
-    <h1>{{ title }}</h1>
-    <img src="{{ assetsDir }}/image.png" />
+    <h1 class="title">{{ title }}</h1>
+    <img class="image" src="{{ image }}" />
+    <img class="logo" src="{{ assetsDir }}/logo.png" />
   </body>
 </html>
 ```
@@ -93,26 +102,30 @@ $ yarn generate
 export default [
   {
     title: 'Apple',
+    image: 'https://example.com/images/apple.png',
     dist: 'apple.png',
   },
   {
     title: 'Banana',
+    image: 'https://example.com/images/banana.png',
     dist: 'banana.png',
   },
   {
     title: 'Candy',
+    image: 'https://example.com/images/candy.png',
     dist: 'candy.png',
   },
 ];
-```
 
-```js
+// OR
+
 export default async () => {
   const res = await fetch('SOME_API');
   const { contents } = await res.json();
 
   return contents.map((content) => ({
     title: content.title,
+    image: content.image.url,
     dist: `${content.id}.png`,
   }));
 };
@@ -123,6 +136,6 @@ export default async () => {
 ```yaml
 width: 1200 # required
 height: 630 # required
-type: jpeg # optional: jpeg (default), png, webp
-quality: 70 # optional
+type: jpeg # optional: jpeg (default), png or webp. NOT jpg.
+quality: 70 # optional: valid with jpeg or webp
 ```
