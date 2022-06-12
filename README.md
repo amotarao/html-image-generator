@@ -6,7 +6,8 @@ HTML Template (with CSS, Assets) + Data => Image
 
 ### Use template
 
-Genearte repository from [template](https://github.com/amotarao/html-image-generator-template)! ([shortcut](https://github.com/amotarao/html-image-generator-template/generate))
+Genearte repository from [template](https://github.com/amotarao/html-image-generator-template).  
+Shortcut: [Clone with a few seconds!](https://github.com/amotarao/html-image-generator-template/generate)
 
 ### Setup manually
 
