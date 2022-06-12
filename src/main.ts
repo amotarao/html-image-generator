@@ -1,7 +1,7 @@
 import { promises as fs } from 'fs';
-import { generate as generateHtml } from './html-generator.js';
-import { generate as generateImage, GenerateOptions as GenerateImageOptions } from './image-generator.js';
-import { closeServer, listenServer } from './server.js';
+import { generate as generateHtml } from './modules/html-generator.js';
+import { generate as generateImage, GenerateOptions as GenerateImageOptions } from './modules/image-generator.js';
+import { closeServer, listenServer } from './modules/server.js';
 
 type GenerateOptions = {
   template: string;
