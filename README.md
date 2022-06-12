@@ -19,7 +19,7 @@ $ yarn add html-image-generator
 ```json
 {
   "...": "...",
-  "type": "modules",
+  "type": "module",
   "...": "..."
 }
 ```
