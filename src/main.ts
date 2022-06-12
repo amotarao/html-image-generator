@@ -14,6 +14,7 @@ type TemplateOptions = {
   height: Viewport['height'];
   type: ScreenshotOptions['type'];
   quality: ScreenshotOptions['quality'];
+  omitBackground: ScreenshotOptions['omitBackground'];
 };
 
 const buildOptions = async (dir: string): Promise<core.CoreOptions> => {
@@ -40,8 +41,15 @@ const buildOptions = async (dir: string): Promise<core.CoreOptions> => {
     baseDir,
     assetsDir,
     generateOptions: {
-      viewport: { width: options.width, height: options.height },
-      screenshotOptions: { type: options.type, quality: options.quality },
+      viewport: {
+        width: options.width,
+        height: options.height,
+      },
+      screenshotOptions: {
+        type: options.type,
+        quality: options.quality,
+        omitBackground: options.omitBackground,
+      },
     },
   };
 };
