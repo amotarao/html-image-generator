@@ -137,7 +137,7 @@ export default async () => {
 width: 1200 # required
 height: 630 # required
 type: png # optional: png, jpeg or webp. NOT jpg.
-quality: 70 # optional: valid with jpeg or webp
+quality: 70 # optional: valid with jpeg and webp
 ```
 
 ## Development mode
