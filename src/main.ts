@@ -29,7 +29,7 @@ export const generate = async ({ dir }: Options): Promise<void> => {
   const options = yaml.load(optionsYaml) as TemplateOptions;
 
   const { default: generateData } = await import(dataFile);
-  const data = await generateData();
+  const data = typeof generateData === 'function' ? await generateData() : generateData;
 
   const dataList = Array.isArray(data) ? data : [data];
   await core.generate({
