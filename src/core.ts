@@ -25,7 +25,7 @@ export const generate = async ({
   generateOptions,
   concurrency = 3,
   log = false,
-}: CoreOptions): Promise<(Buffer | string | undefined)[]> => {
+}: CoreOptions): Promise<(Buffer | undefined)[]> => {
   const limit = pLimit(concurrency);
   const port = await listenServer(assetsDir);
 
