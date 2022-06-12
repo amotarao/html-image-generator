@@ -1,5 +1,6 @@
 import { promises as fs } from 'fs';
 import path from 'path';
+import chokidar from 'chokidar';
 import yaml from 'js-yaml';
 import { ScreenshotOptions, Viewport } from 'puppeteer';
 import * as core from './core.js';
@@ -15,7 +16,7 @@ type TemplateOptions = {
   quality: ScreenshotOptions['quality'];
 };
 
-export const generate = async ({ dir }: Options): Promise<void> => {
+const buildOptions = async (dir: string): Promise<core.CoreOptions> => {
   const rootDir = path.resolve(process.cwd());
   const baseDir = path.resolve(rootDir, dir);
 
@@ -32,7 +33,8 @@ export const generate = async ({ dir }: Options): Promise<void> => {
   const data = typeof generateData === 'function' ? await generateData() : generateData;
 
   const dataList = Array.isArray(data) ? data : [data];
-  await core.generate({
+
+  return {
     template,
     data: dataList,
     baseDir,
@@ -41,6 +43,39 @@ export const generate = async ({ dir }: Options): Promise<void> => {
       viewport: { width: options.width, height: options.height },
       screenshotOptions: { type: options.type, quality: options.quality },
     },
+  };
+};
+
+export const generate = async ({ dir }: Options): Promise<void> => {
+  const options = await buildOptions(dir);
+  await core.generate({
+    ...options,
     log: true,
   });
+};
+
+export const dev = async ({ dir }: Options): Promise<void> => {
+  const rootDir = path.resolve(process.cwd());
+  const baseDir = path.resolve(rootDir, dir);
+
+  const callback = async (...args: any[]) => {
+    const options = await buildOptions(dir);
+    const data = options.data.slice(0, 1);
+    const distFile = path.resolve(baseDir, `_dev.${options.generateOptions.screenshotOptions?.type || 'png'}`);
+    data[0].dist = distFile;
+
+    await core.generate({
+      ...options,
+      data: options.data.slice(0, 1),
+    });
+    console.log(`✔︎ Generated: ${distFile}`);
+  };
+
+  callback();
+  chokidar
+    .watch(baseDir, {
+      depth: 99,
+      ignored: /(^|\/)_dev\.(jpeg|png|webp)$/,
+    })
+    .on('change', callback);
 };
