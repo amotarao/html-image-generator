@@ -1,28 +1,46 @@
 import { promises as fs } from 'fs';
-import { generate as generateHtml } from './html-generator.js';
-import { generate as generateImage, GenerateOptions as GenerateImageOptions } from './image-generator.js';
-import { closeServer, listenServer } from './server.js';
+import path from 'path';
+import yaml from 'js-yaml';
+import { ScreenshotOptions, Viewport } from 'puppeteer';
+import * as core from './core.js';
 
-type GenerateOptions = {
-  template: string;
-  data: any;
-  assetsDir: string;
-  generateOptions: GenerateImageOptions;
-  dist: string;
+type Options = {
+  dir: string;
 };
 
-export const generate = async ({
-  template,
-  data,
-  assetsDir,
-  generateOptions,
-  dist,
-}: GenerateOptions): Promise<void> => {
-  const port = await listenServer(assetsDir);
+type TemplateOptions = {
+  width: Viewport['width'];
+  height: Viewport['height'];
+  type: ScreenshotOptions['type'];
+  quality: ScreenshotOptions['quality'];
+};
 
-  const html = generateHtml(template, { ...data, assetsDir: `http://localhost:${port}` });
-  const image = await generateImage(html, generateOptions);
-  await fs.writeFile(dist, image);
+export const generate = async ({ dir }: Options): Promise<void> => {
+  const rootDir = path.resolve(process.cwd());
+  const baseDir = path.resolve(rootDir, dir);
 
-  await closeServer();
+  const templateFile = path.resolve(baseDir, 'template.html');
+  const assetsDir = path.resolve(baseDir, 'assets');
+  const dataFile = path.resolve(baseDir, 'data.js');
+  const optionsFile = path.resolve(baseDir, 'options.yaml');
+
+  const template = (await fs.readFile(templateFile)).toString();
+  const optionsYaml = (await fs.readFile(optionsFile)).toString();
+  const options = yaml.load(optionsYaml) as TemplateOptions;
+
+  const { default: generateData } = await import(dataFile);
+  const data = typeof generateData === 'function' ? await generateData() : generateData;
+
+  const dataList = Array.isArray(data) ? data : [data];
+  await core.generate({
+    template,
+    data: dataList,
+    baseDir,
+    assetsDir,
+    generateOptions: {
+      viewport: { width: options.width, height: options.height },
+      screenshotOptions: { type: options.type, quality: options.quality },
+    },
+    log: true,
+  });
 };
