@@ -45,10 +45,10 @@ Add `[template-name]` directory
 
 #### Add files
 
-- `[template-name]`/template.html
-- `[template-name]`/data.js
-- `[template-name]`/options.yaml
-- `[template-name]`/assets/`[some asset files]`
+- `[template-name]/template.html`
+- `[template-name]/data.js`
+- `[template-name]/options.yaml`
+- `[template-name]/assets/[some asset files]`
 
 #### Run script
 
@@ -139,3 +139,11 @@ height: 630 # required
 type: png # optional: png, jpeg or webp. NOT jpg.
 quality: 70 # optional: valid with jpeg or webp
 ```
+
+## Development mode
+
+```bash
+$ yarn dev
+```
+
+Run script and watch `[template-name]/_dev.(jpeg,png,webp)`
