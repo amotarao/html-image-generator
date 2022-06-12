@@ -2,7 +2,7 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import chokidar from 'chokidar';
 import yaml from 'js-yaml';
-import { ScreenshotOptions, Viewport } from 'puppeteer';
+import { PageScreenshotOptions, ViewportSize } from 'playwright-core';
 import * as core from './core.js';
 
 type Options = {
@@ -10,11 +10,11 @@ type Options = {
 };
 
 type TemplateOptions = {
-  width: Viewport['width'];
-  height: Viewport['height'];
-  type: ScreenshotOptions['type'];
-  quality: ScreenshotOptions['quality'];
-  omitBackground: ScreenshotOptions['omitBackground'];
+  width: ViewportSize['width'];
+  height: ViewportSize['height'];
+  type: PageScreenshotOptions['type'];
+  quality: PageScreenshotOptions['quality'];
+  omitBackground: PageScreenshotOptions['omitBackground'];
 };
 
 const buildOptions = async (dir: string): Promise<core.CoreOptions> => {
@@ -66,10 +66,10 @@ export const dev = async ({ dir }: Options): Promise<void> => {
   const rootDir = path.resolve(process.cwd());
   const baseDir = path.resolve(rootDir, dir);
 
-  const callback = async (...args: any[]) => {
+  const callback = async () => {
     const options = await buildOptions(dir);
     const data = options.data.slice(0, 1);
-    const distFile = path.resolve(baseDir, `_dev.${options.generateOptions.screenshotOptions?.type || 'png'}`);
+    const distFile = path.resolve(baseDir, `_dev.${options.generateOptions.screenshotOptions?.type ?? 'png'}`);
     data[0].dist = distFile;
 
     await core.generate({

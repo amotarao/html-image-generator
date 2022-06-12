@@ -1,4 +1,3 @@
-import { promises as fs } from 'fs';
 import path from 'path';
 import pLimit from 'p-limit';
 import { generate as generateHtml } from './modules/html-generator.js';
@@ -32,15 +31,18 @@ export const generate = async ({
   const images = await Promise.all(
     data.map((d) =>
       limit(async () => {
+        const filePath = 'dist' in d && d.dist ? path.resolve(baseDir, d.dist) : undefined;
+
         const html = generateHtml(template, { ...d, assetsDir: `http://localhost:${port}` });
-        const image = await generateImage(html, generateOptions);
+        const image = await generateImage(html, {
+          viewport: generateOptions.viewport,
+          screenshotOptions: {
+            ...generateOptions.screenshotOptions,
+            path: filePath,
+          },
+        });
 
-        if ('dist' in d && d.dist) {
-          const file = path.resolve(baseDir, d.dist);
-          const dir = path.dirname(file);
-
-          await fs.mkdir(dir, { recursive: true });
-          await fs.writeFile(file, image);
+        if (filePath) {
           log && console.log(`✔︎ Generated: ${d.dist}`);
           return;
         }
