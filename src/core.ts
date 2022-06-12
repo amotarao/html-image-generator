@@ -7,7 +7,7 @@ import { closeServer, listenServer } from './modules/server.js';
 
 const limit = pLimit(3);
 
-type CoreOptions = {
+export type CoreOptions = {
   template: string;
   data: {
     [key: string]: any;
