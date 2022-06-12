@@ -1,6 +1,6 @@
 # HTML Image Generator
 
-HTML Template (with CSS, Assets) + Data = Image
+HTML Template (with CSS, Assets) + Data => Image
 
 ## Setup
 
