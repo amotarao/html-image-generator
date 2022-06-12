@@ -37,6 +37,9 @@ export const generate = async ({
 
         if ('dist' in d && d.dist) {
           const file = path.resolve(baseDir, d.dist);
+          const dir = path.dirname(file);
+
+          await fs.mkdir(dir, { recursive: true });
           await fs.writeFile(file, image);
           log && console.log(`✔︎ Generated: ${d.dist}`);
           return;
