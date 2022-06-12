@@ -41,8 +41,15 @@ const buildOptions = async (dir: string): Promise<core.CoreOptions> => {
     baseDir,
     assetsDir,
     generateOptions: {
-      viewport: { width: options.width, height: options.height },
-      screenshotOptions: { type: options.type, quality: options.quality },
+      viewport: {
+        width: options.width,
+        height: options.height,
+      },
+      screenshotOptions: {
+        type: options.type,
+        quality: options.quality,
+        omitBackground: options.omitBackground,
+      },
     },
   };
 };
